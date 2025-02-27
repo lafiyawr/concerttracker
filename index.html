@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Concert Venues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .leaderboard {
+            max-width: 400px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .venue {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #333;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #ffcc00;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎤 Top 5 Concert Venues 🎟</h2>
+    <div class="leaderboard" id="venueList"></div>
+
+    <script>
+        // Example data
+        const venues = [
+            { name: "Madison Square Garden", count: 12 },
+            { name: "Barclays Center", count: 9 },
+            { name: "The Fillmore", count: 7 },
+            { name: "Hollywood Bowl", count: 6 },
+            { name: "Red Rocks", count: 5 }
+        ];
+
+        const maxConcerts = Math.max(...venues.map(v => v.count));
+
+        function renderLeaderboard() {
+            const container = document.getElementById("venueList");
+            container.innerHTML = "";
+
+            venues.forEach((venue, index) => {
+                const venueElement = document.createElement("div");
+                venueElement.classList.add("venue");
+                venueElement.innerHTML = `
+                    <span>${index + 1}. ${venue.name}</span>
+                    <div class="progress-bar" style="width: ${(venue.count / maxConcerts) * 100}%"></div>
+                `;
+                container.appendChild(venueElement);
+            });
+        }
+
+        renderLeaderboard();
+    </script>
+
+</body>
+</html>
